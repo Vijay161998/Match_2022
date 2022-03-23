@@ -1,0 +1,33 @@
+package pom_adactin;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class Hotel_Selection {
+	
+	public WebDriver driver;
+	
+	@FindBy(name="radiobutton_0")
+	private WebElement radio;
+
+	@FindBy(name="continue")
+	private WebElement con;
+
+	public Hotel_Selection(WebDriver driver2) {
+	
+		this.driver = driver2;
+		
+		PageFactory.initElements(driver,this);
+	}
+
+	public WebElement getRadio() {
+		return radio;
+	}
+
+	public WebElement getCon() {
+		return con;
+	}
+
+}
