@@ -6,6 +6,8 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import com.base_class.Base_Class;
+import com.configuratorreader.Automation_Configurator_Reader;
+import com.configuratorreader.Automation_File_Reader;
 import com.logger.demo.Logger_Basic;
 import com.pageobjctmanager.PageObjectManager;
 
@@ -15,21 +17,25 @@ public class Automation extends Base_Class {
 
 	public static PageObjectManager pom = new PageObjectManager(driver);   
 	
-	 public static Logger log =Logger.getLogger(Logger_Basic.class);
+	 public static Logger log =Logger.getLogger(Logger_Basic.class);  
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Throwable {
 
 		PropertyConfigurator.configure("log4j.properties");
 				
-		geturl("http://automationpractice.com/index.php");
+		String url = Automation_File_Reader.get_Automation_File_Reader().get_Automation_Configurator_Reader().get_Url();
+		
+		geturl(url);
+		
 		log.info("Url lanch");
 
 		clickOnElement(pom.getSign().getSignin_Btn());
 
 		wait(30,TimeUnit.SECONDS);
 
-		inputValueElement(pom.getLogin().getEmail(),textdata("C:\\Users\\De\\Desktop\\Automation.xlsx",2, 5));
-		inputValueElement(pom.getLogin().getPassword(),textdata("C:\\Users\\De\\Desktop\\Automation.xlsx",7, 5));
+		inputValueElement(pom.getLogin().getEmail(),Automation_File_Reader.get_Automation_File_Reader().get_Automation_Configurator_Reader().get_Email());
+		inputValueElement(pom.getLogin().getPassword(),Automation_File_Reader.get_Automation_File_Reader().get_Automation_Configurator_Reader().get_Password());
+		
 		clickOnElement(pom.getLogin().getSubmit_Btn());
 
 		log.info("Loging Successfully");

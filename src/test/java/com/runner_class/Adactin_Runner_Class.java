@@ -5,9 +5,10 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import com.base_class.Base_Class;
+import com.configuratorreader.Adactin_Configurator;
+import com.configuratorreader.Adactin_File;
 import com.logger.demo.Logger_Basic;
 import com.pageobjctmanager.Pagd_Object_Manager_Adactin;
-import pom_adactin.Login_Page;
 
 public class Adactin_Runner_Class extends Base_Class {
 
@@ -21,12 +22,14 @@ public class Adactin_Runner_Class extends Base_Class {
 		
 		PropertyConfigurator.configure("log4j.properties");
 		 	
-		geturl("https://adactinhotelapp.com/");
+	    String url = Adactin_File.get_Instene().get_Reader().get_Url();
+	    geturl(url);
+		
 		loge.info("Url lanch");
 		
-		inputValueElement(pa.getLog().getUser(),textdata("C:\\Users\\De\\Desktop\\Adactin.xlsx",11, 5));
+		inputValueElement(pa.getLog().getUser(),Adactin_File.get_Instene().get_Reader().get_Username());
 
-		inputValueElement(pa.getLog().getPassword(),textdata("C:\\Users\\De\\Desktop\\Adactin.xlsx",12, 5));
+		inputValueElement(pa.getLog().getPassword(),Adactin_File.get_Instene().get_Reader().get_Password());
 
 		clickOnElement(pa.getLog().getLogin());
 
@@ -60,7 +63,7 @@ public class Adactin_Runner_Class extends Base_Class {
 		dropdown("byvalue",pa.getHb().getCcType(),textdata("C:\\Users\\De\\Desktop\\Adactin.xlsx",32, 5));
 		dropdown("byvalue",pa.getHb().getMon(),textdata("C:\\Users\\De\\Desktop\\Adactin.xlsx",33, 5));
 		dropdown("byvalue",pa.getHb().getYear(),textdata("C:\\Users\\De\\Desktop\\Adactin.xlsx",34, 5));
-		inputValueElement(pa.getHb().getCcv(),textdata("C:\\Users\\De\\Desktop\\Adactin.xlsx",35, 5));
+		inputValueElement(pa.getHb().getCcv(),Adactin_File.get_Instene().get_Reader().get_Password());
 		clickOnElement(pa.getHb().getBookNow());
 
 		loge.info("Enter User Details");
